@@ -93,6 +93,8 @@ export default function navbarTemplate() {
     `}
     </nav>`
     }
+
+    <slot name="aside-footer" class="aside-footer"></slot>
   </aside>
 `;
 }
