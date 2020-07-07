@@ -91,10 +91,10 @@ export default function navbarTemplate() {
         </div>`)}
       `)}
     `}
+      <slot name="nav-bar-footer"></slot>
     </nav>`
     }
-
-    <slot name="aside-footer" class="aside-footer"></slot>
+    <slot name="nav-bar-aside-footer"></slot>
   </aside>
 `;
 }
