@@ -136,6 +136,7 @@ export default class RapiDoc extends LitElement {
         font-family:var(--font-regular);
       }
       .body {
+        position: relative;
         display:flex;
         height:100%;
         width:100%;
@@ -144,7 +145,7 @@ export default class RapiDoc extends LitElement {
       }
 
       .main-content { 
-        margin:0;
+        margin: 40px 0 0;
         padding: 0; 
         display:block;
         flex:1;
@@ -153,6 +154,55 @@ export default class RapiDoc extends LitElement {
         overflow-x: hidden;
         scrollbar-width: thin;
         scrollbar-color: var(--border-color) transparent;
+      }
+
+      .main-header {
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .hamburger-btn {
+        flex-grow: 0;
+        flex-shrink: 0;
+        position: relative;
+        box-sizing: content-box;
+        display: block;
+        border: solid 1px #fff;
+        border-width: 18px 3px;
+        padding: 0;
+        width: 34px;
+        height: 4px;
+        background: var(--primary-color);
+        border-radius: 1px;
+      }
+      .hamburger-btn::before {
+        content: "";
+        top: 0;
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        transform: translateY(-200%);
+        background: var(--primary-color);
+        border-radius: 1px;
+      }
+      
+      .hamburger-btn::after {
+        content: "";
+        top: 0;
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        transform: translateY(200%);
+        background: var(--primary-color);
+        border-radius: 1px;
       }
 
       .main-content-inner--view-mode {
@@ -293,9 +343,18 @@ export default class RapiDoc extends LitElement {
       }
 
       @media only screen and (min-width: 768px) {
+        .main-content {
+          margin-top: 0;
+        }
+        .main-header {
+          position: static;
+        }
         .nav-bar {
+          position: static;
           width: 260px;
-          display:flex;
+        }
+        .nav-bar .m-btn, .hamburger-btn {
+          display: none;
         }
         .only-large-screen{
           display:block;
@@ -321,7 +380,6 @@ export default class RapiDoc extends LitElement {
       @media only screen and (min-width: 1000px) {
         .nav-bar {
           width: ${unsafeCSS(this.fontSize === 'default' ? '300px' : this.fontSize === 'large' ? '315px' : '330px')};
-          display:flex;
         }
         .section-gap--focused-mode { 
           padding: 12px 100px 12px 100px; 
@@ -507,6 +565,14 @@ export default class RapiDoc extends LitElement {
     this.shadowRoot.getElementById('spec-file').click();
   }
 
+  closeNavBar() {
+    this.shadowRoot.querySelector('.nav-bar').classList.remove('active');
+  }
+
+  openNavBar() {
+    this.shadowRoot.querySelector('.nav-bar').classList.add('active');
+  }
+
   onSearchChange(e) {
     this.matchPaths = e.target.value.toLowerCase();
 
@@ -675,6 +741,7 @@ export default class RapiDoc extends LitElement {
     await sleep(0); // important - else contentEl will be null
     const contentEl = this.shadowRoot.getElementById(targetElId);
     if (contentEl) {
+      this.closeNavBar();
       // Disable IntersectionObserver before scrolling into the view, else it will try to scroll the navbar which is not needed here
       this.isIntersectionObserverActive = false;
       contentEl.scrollIntoView({ behavior: 'auto', block: 'start' });

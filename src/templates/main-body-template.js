@@ -78,7 +78,10 @@ export default function mainBodyTemplate() {
       
       <!-- Main Content -->
       <main class="main-content regular-font">
-        <slot></slot>
+        <header class="main-header">
+          <slot></slot>
+          ${((this.renderStyle === 'read' || this.renderStyle === 'focused') && this.resolvedSpec) ? html`<button @click='${this.openNavBar}' type="button" class="hamburger-btn m-btn"></button>` : ''}
+        </header>
         <div class="main-content-inner--${this.renderStyle}-mode">
           ${this.loading === true ? html`<div class="loader"></div>` : ''}
           ${this.loadFailed === true ? html`<div style="text-align: center;margin: 16px;"> Unable to load the Spec</div>` : ''}

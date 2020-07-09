@@ -6,7 +6,8 @@ import marked from 'marked';
 export default function navbarTemplate() {
   return html`
   <aside class='nav-bar'>
-    <div style="padding:16px 30px 0 16px;">
+    <div style="padding:16px 30px 0 16px;display:flex;flex-flow:row-reverse;align-items:center;flex-shrink:0">
+      <button @click='${this.closeNavBar}' class="m-btn toolbar-btn large" type="button">✕</button>
       <slot name="nav-logo" class="logo"></slot>
     </div>
     ${(this.allowSearch === 'false')

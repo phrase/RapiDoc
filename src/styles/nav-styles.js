@@ -2,7 +2,8 @@ import { css } from 'lit-element';
 
 export default css`
 .nav-bar {
-  width:0;
+  display:flex;
+  width: 100%;
   height:100%;
   overflow: hidden;
   color:var(--nav-text-color);
@@ -13,11 +14,17 @@ export default css`
   background-blend-mode: multiply;
   box-sizing:border-box;
   line-height: calc(var(--font-size-small) + 4px);
-  display:none;
-  position:relative;
+  position:absolute;
+  z-index: 2;
+  left: -100%;
   flex-direction:column;
   flex-wrap:nowrap;
   word-break:break-word;
+  will-change: left;
+  transition: .3s ease-in-out left;
+}
+.nav-bar.active {
+  left: 0;
 }
 .nav-scroll {
   overflow-x: hidden;
