@@ -16,7 +16,7 @@ export default css`
   line-height: calc(var(--font-size-small) + 4px);
   position:absolute;
   z-index: 2;
-  left: -100%;
+  left: 100%;
   flex-direction:column;
   flex-wrap:nowrap;
   word-break:break-word;

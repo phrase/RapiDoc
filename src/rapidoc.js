@@ -145,8 +145,9 @@ export default class RapiDoc extends LitElement {
       }
 
       .main-content { 
-        margin: 40px 0 0;
-        padding: 0; 
+        box-sizing: border-box;
+        margin: 0;
+        padding: 40px 0 0; 
         display:block;
         flex:1;
         height:100%;
@@ -344,7 +345,7 @@ export default class RapiDoc extends LitElement {
 
       @media only screen and (min-width: 768px) {
         .main-content {
-          margin-top: 0;
+          padding-top: 0;
         }
         .main-header {
           position: static;
